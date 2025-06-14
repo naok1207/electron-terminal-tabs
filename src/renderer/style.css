@@ -10,9 +10,134 @@ html, body {
   background-color: #1e1e1e;
 }
 
-#terminal-container {
-  width: 100%;
-  height: 100%;
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab bar styles */
+#tab-bar {
+  display: flex;
+  align-items: center;
+  background-color: #252526;
+  border-bottom: 1px solid #1e1e1e;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+#tabs-container {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#tabs-container::-webkit-scrollbar {
+  height: 3px;
+}
+
+#tabs-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#tabs-container::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 3px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 35px;
+  background-color: #2d2d30;
+  border-right: 1px solid #252526;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  min-width: 120px;
+  max-width: 200px;
+}
+
+.tab:hover {
+  background-color: #3e3e42;
+}
+
+.tab.active {
+  background-color: #1e1e1e;
+}
+
+.tab-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #cccccc;
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.tab.active .tab-title {
+  color: #ffffff;
+}
+
+.tab-close {
+  background: none;
+  border: none;
+  color: #969696;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tab:hover .tab-close {
+  opacity: 1;
+}
+
+.tab-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+#new-tab-button {
+  background: none;
+  border: none;
+  color: #969696;
+  font-size: 18px;
+  padding: 0 15px;
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#new-tab-button:hover {
+  background-color: #3e3e42;
+  color: #ffffff;
+}
+
+/* Terminals container */
+#terminals-container {
+  flex: 1;
+  position: relative;
+  background-color: #1e1e1e;
+}
+
+.terminal-instance {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 10px;
 }
 
