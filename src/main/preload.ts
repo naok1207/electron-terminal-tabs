@@ -19,5 +19,26 @@ contextBridge.exposeInMainWorld('electronAPI', {
         callback(sessionId);
       });
     }
+  },
+  tabs: {
+    create: () => ipcRenderer.invoke('tab:create'),
+    switch: (tabId: string) => ipcRenderer.send('tab:switch', tabId),
+    close: (tabId: string) => ipcRenderer.send('tab:close', tabId),
+    getTabs: () => ipcRenderer.invoke('tab:getTabs'),
+    onTabCreated: (callback: (tabId: string, tabs: Array<{id: string, name: string, active: boolean}>) => void) => {
+      ipcRenderer.on('tab:created', (event, tabId, tabs) => {
+        callback(tabId, tabs);
+      });
+    },
+    onTabSwitched: (callback: (tabId: string) => void) => {
+      ipcRenderer.on('tab:switched', (event, tabId) => {
+        callback(tabId);
+      });
+    },
+    onTabClosed: (callback: (tabId: string, tabs: Array<{id: string, name: string, active: boolean}>) => void) => {
+      ipcRenderer.on('tab:closed', (event, tabId, tabs) => {
+        callback(tabId, tabs);
+      });
+    }
   }
 });

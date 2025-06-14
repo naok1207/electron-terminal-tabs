@@ -88,3 +88,24 @@ ipcMain.on('terminal:dispose', (event, sessionId: string) => {
   if (!terminalManager) return;
   terminalManager.disposeTerminal(sessionId);
 });
+
+// Tab management IPC handlers
+ipcMain.handle('tab:create', () => {
+  if (!terminalManager) return null;
+  return terminalManager.createTab();
+});
+
+ipcMain.on('tab:switch', (event, tabId: string) => {
+  if (!terminalManager) return;
+  terminalManager.switchTab(tabId);
+});
+
+ipcMain.on('tab:close', (event, tabId: string) => {
+  if (!terminalManager) return;
+  terminalManager.closeTab(tabId);
+});
+
+ipcMain.handle('tab:getTabs', () => {
+  if (!terminalManager) return [];
+  return terminalManager.getTabs();
+});
